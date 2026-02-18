@@ -1,2 +1,45 @@
-概念：
-	使用java操作关系型数据库的一套API
+- 概念：
+	- 使用java操作关系型数据库的一套API
+- DriverManager（驱动管理类）：
+	- 作用：
+		1. 注册驱动
+			- 虽然使用 `Class.forName("com.mysql.jdbc.Driver")` 实现，但底层还是使用的DriverManager
+		2. 获取数据库连接
+	- 常用方法：
+		- 语法：`static Connection | getConnection(String url, String user, String password)`
+			- 作用：用于建立与数据库的连接对象
+			- url：
+				- 语法：`jdbc:mysql://ip地址:端口号/数据库名称?参数键值对1&参数键值对2`
+				- 示例：`jdbc:mysql://127.0.0.1:3306/study?useSSL=false`
+				- 如果是使用本地的数据库可以省略 ip 和端口号
+			- user：登录数据库的用户名
+			- password：登录数据库的密码
+		- 示例：`Connection conn = getConnection(url, user, password);`
+- Connection（数据库连接对象）：
+	- 作用：
+		1. 获取执行 SQL 的对象
+		2. 管理事务
+	- 获取执行SQL 的对象：
+		- 普通执行 SQL 对象：`Statement createStatement()`
+		- 预编译 SQL 的 SQL 执行对象，防止 SQL 注入
+			- `PreparedStatement prepareStatement(sql)` 
+		- 执行储存过程的对象（不常用）：`CallableStatement prepareCall(sql)`
+		- 使用前需要先创建 Connection 对象，例：
+			- `Statement sttm = conn.createStatement();`
+	- 管理事务：
+		- 开启事务：`conn.setAutoCommit(boolean autoCommit)`
+			- false 为手动提交事务，true 为自动提交事务
+		- 提交事务：`conn.commit()`
+		- 回滚事务：`conn.rollback()`
+		- 注意：
+			- 一般是在 try - catch 中执行，在 try 中开启事务，出现错误后回滚，正常执行则提交
+- Statement：
+	- 作用：执行 SQL 语句
+	- 语法：
+		- `int executeUpdate(sql)`
+			- 执行 DML，DDL 语句，返回值代表 DML语句影响的行数，DDL执行成功返回0
+		- `ResultSet executeQuery(sql)`
+			- 执行 DQL 语句，返回值为 ResultSet 结果集对象
+	- 使用前要先获取执行 SQL 的对象 Statement
+		- `Statement sttm = conn.createStatement();`
+	- 然后通过 sttm 调用：`sttm.executeUpdate(sql);`
