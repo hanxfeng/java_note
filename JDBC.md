@@ -43,3 +43,26 @@
 	- 使用前要先获取执行 SQL 的对象 Statement
 		- `Statement sttm = conn.createStatement();`
 	- 然后通过 sttm 调用：`sttm.executeUpdate(sql);`
+- ResultSet（结果集对象）：
+	- 作用：封装了 DQL 语句的查询结果，可以从中获取查询到的结果
+	- 常用方法：
+		- `boolean next()`：
+			- 返回值：
+				- true：当前行有数据，是有效行
+				- false：当前行无数据，是无效行
+			- 作用：将光标向前移动一行，并判断当前行是否是有效行
+		- `E getE(参数);`
+			- 返回值：获取到的数据
+			- 参数：
+				- 可以传入 int 或 String，int 是列编号（索引），从 1 开始，String 是列名称
+			- 作用：获取数据，E 指任意类型数据
+- PreparedStatement（）：
+	- 作用：预编译 SQL 对象并执行 SQL 语句，用于防止 SQL 注入
+	- 使用：
+		1. 设置 sql ：`select * from study where username = ? and password = ?`
+			- 与 Statement 不同，查询条件不再使用字符串拼接而是使用 ? 作为占位符
+		2. 获取 PreparedStatement 对象：`PreparedStatement pstmt  = conn.preparedStatement(sql);
+		3. 设置 ? 的值：`pstmt.setE(int index, E value);`
+			- index：要替换的 ? 占位符的序号，第一个就是 1，第二个是 2
+			- value：要替换的 ? 占位符的内容，比如第一个 ? 替换为 张三
+		4. 执行 sql：`ResultSet rs = pstmt.executeQuery();`
