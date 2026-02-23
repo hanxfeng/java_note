@@ -1,1 +1,41 @@
 - 概述：在 Dao 层中用于操作数据库的框架，用于简化 jdbc 的开发
+- 简单程序示例1：
+	- ![[Mybatis简单使用示例.png]]
+		- @mapper 是 MyBatis 提供的注解，用于标记一个接口为 MyBatis 的 Mapper 接口。加上该注解后，MyBatis 会为这个接口生成代理实现类，并将其注册到 Spring 容器中，从而可以在其他地方通过依赖注入使用。
+		- 在 @Select 注解中书写要使用的 SQL 语句，除了查询外还有 `@Delete @Update @Insert` 注解
+		- 最后新建一个方法，接收的返回值类型是在数据库中查询到的数据类型，调用该方法就可以使用定义好的 SQL 语句操作数据库
+		- 如果在启动类中使用 `@MapperScan("com.example.java_practice.mapper")` 指定扫描的包，那么可以不用在护额就上加 @Mapper 注解
+- 简单程序示例2：
+	- ![[Mybatis简单使用示例2.png]]
+		- 如果要根据传入参数进行查询，可以使用 `#{}` 的占位符，在占位符中输入变量即可
+		- 如果传入一个实体类，那么`#{}`中的变量是实体类中的变量，不用输入实体类.变量名
+- lombok：
+	- lombok 注解及作用：![[Lombok注解及作用.png]]
+- 基础操作：
+	- 主键返回：
+		- 作用：返回插入数据的主键值
+		- 使用：在 `@Insert` 注解上加一个新注解`@Options(keyProperty = "id", useGeneratedKeys = true)` 第一个参数指定返回的主键值添加到对象的哪个成员变量中，第二个是是否开启主键返回，默认为 false
+- XML 映射文件配置 SQL 语句：
+	- ![[XML映射文件执行sql.png]]
+		- ![[xml示例代码.png]]
+		- 前两行固定格式，可以不加，但可能出问题
+		- mapper 的 namespace 属性指定执行 sql 的包位置
+		- select 的 id 属性指定调用哪个方法时执行当前 SQL，resultType 属性指向返回值的数据类型
+- 动态 SQL：
+	- 概述：随着用户输入或外部条件变化而变化的 SQL，在 xml 中使用
+	- 格式：
+		- if：
+			- ![[动态SQL的if示例.png]]
+			- 当 where 中有条件成立时，添加 where 关键字，否则不添加
+
+		- foreach:
+			- ![[xml的foreach代码示例.png]]
+				- collection ：需要循环读取其中内容的变量
+				- item：类似 for 循环中的 i
+				- separator：拼接的分隔符
+				- open：拼接开始的符号
+				- close：拼接结束的符号
+				- 拼接结果(假设ids内是1，2，3)：`(1,2,3)`
+		- sql 和 include
+			- 概述：sql 用于保存需要反复使用的代码，include 用于引用 sql 保存的代码
+			- ![[sql和include示例.png]]
