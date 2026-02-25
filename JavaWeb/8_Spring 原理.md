@@ -1,0 +1,45 @@
+- 配置优先级：
+	- Spring 中支持三种类型的配置文件 application.properties ，application.yaml，application.yml，优先级 properties > yml > yaml
+- bean 的管理：
+	- 获取 bean：
+		- 默认情况下，Spring 项目启动时，会把 bean 都创建好放在 IOC 容器中2，如果想主动获取这些 bean，可以通过如下方式：
+			- ![[获取bena对象的三种方式示例.png]]
+	- bena 的作用域：
+		- ![[bean的作用域.png]]
+		- bena 的实例化：
+			- 默认情况下，启动 Spring 项目时会创建 bean 对象，即实例化 bean 对象，在类上添加 @Lazy 注解，会延迟实例化 bean 对象，在使用时再创建 bean 对象，而不是一开始就创建
+		- 修改 bean 的作用域：
+			- 默认情况下，bena 作用域为 singleton，可以通过在类上 @Scpoe 注解配置作用域，例如`@Scpoe("prototype")` 此时作用域被切换为prototype
+	- 第三方 bean：
+		- 如果要管理的 bean 来自第三方而不是自己编写的，无法使用 @Component 及衍生注解声明的，就需要用到 @Bean 注解，这个注解的意思是将注解的方法的返回值交给 IOC 容器管理，成为 IOC 容器的 bean 对象，示例：![[bean注解示例.png]]
+		- 以上方法是将 第三方 bean 写在启动类中，实际不建议这样做，最好是对这些 bean 集中进行配置，可以通过 @Configuration 注解声明一个配置类，将所有第三方 bean 都写在这个配置类中。
+		- 可以通过 @Bean 的 name/value 属性配置第三方 bean 的名称，但一般不会进行配置，而是使用默认的名称，该名称是 @Bean 所在方法的方法名
+		- 如果要在配置第三方 bena 的方法中添加自定义的 bena 对象，不能使用 `@Autowired` 注解，而是要在形参处传入，例：![[依赖注入示例.png]]
+- SpringBoot 原理：
+	- 起步依赖：
+		- 原理：maven 的依赖传递
+	- 自动配置原理：
+		- 概述：当 Spring 项目启动后，一些配置类、bean 对象就自动存入 IOC 容器中，不需要手动声明，从而简化操作，省去了繁琐的配置。下方导入均指将 bean 对象存入 IOC 容器
+		- 方案：
+			- @ComponentScan 组件扫描：
+				- 通过配置该注解来自动扫描第三方依赖
+				- 使用繁琐，性能低
+			- 使用 @Import 注解导入。使用 @Import 导入的类会被 Spring 加载到 IOC 容器中，导入形式有以下几种：
+				- 导入 普通类
+					- 不用加任何注解，导入示例：`@Import({AddNumber.class})`
+				- 导入 配置类
+					- 不用加任何注解，导入示例：`@Import({AddNumber.class})`
+				- 导入 ImportSelector 接口实现类:
+					- 概述：`ImportSelector` 是 Spring 框架中一个非常重要的接口，它通常与 `@Import` 注解配合使用，用于**动态选择**需要导入的配置类（通常是带有 `@Configuration` 的类）。通过重写 `selectorImports`方法，可以根据某些条件（如环境变量、类路径是否存在某个类等）来决定实际要注册哪些 Bean 定义，该方法返回一个 String 数组，内容是要导入的普通类或实现类。示例：![[ImportSelector接口示例.png]]
+					- 导入示例：`@Import({MyImportSelector})`
+			- 第三方依赖提供导入注解：
+				- 该注解的命名为 `@Enable...`省略号为自定义的名称，只需要在启动类上添加该注解即可导入第三方依赖的类。该注解中前两个注解是元注解，@Import 注解中指定了要导入的类，示例：![[导入注解示例.png]]
+	- 源码分析：
+		- 能实现自动配置，原因是启动类中存在 @SpringBootApplication 注解，这个注解中存在 @SpringBootConfiguration、@EnableAutoConfiguration、@ComponentScan 三个注解：
+			- @SpringBootConfiguration 与 @Configuration 相同，用来声明当前类也是一个配置类
+			- @ComponentScan，用于进行组件扫描，偶然扫描当前引导类所在包及其子包
+			- @EnableAutoConfiguration，SpringBoot 实现自动化的核心注解。
+				- Spring 的 jar 包中存在两个配置文件（3.0版本后只有一个），通过使用 ImportSelector 接口实现类的 selectorImports 方法，将配置文件中记录的 java 类的全类名加载到 String 类型的数组中，再通过 @Import 注解将这个数组中记录的类加载到 IOC 容器中。但不是一次性全部加载到 IOC 容器中，而是通过 @Conditional... 这个注解按条件加载进IOC 容器中。 ![[自动配置示例.png]]
+	- @Conditional：
+		- 作用：按一定条件进行判断，满足给定条件后才会注册对应 bean 对象到 Spring IOC 容器中，可以用于方法或类上。@Conditional 是父注解，有大量子注解
+		- 常用子注解：![[常用子注解示例.png]]
