@@ -4,10 +4,6 @@ package org.example.javastudy.算法.双指针;
 
 注意：答案中不可以包含重复的三元组。
 
-
-
-
-
 示例 1：
 
 输入：nums = [-1,0,1,2,-1,-4]
@@ -20,7 +16,15 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
 注意，输出的顺序和三元组的顺序并不重要。
  */
 
+/*
+思路还是嵌套遍历，首先对数组进行从小到大的排序，有 first， second， third 三个指针
+先从 first 进行遍历，对于每个 first，使初始 second 为 first + 1，初始 third 为最大索引
+同时定义一个中间值 target ，它的值为 -nums[first] ，因为数组为从小到大排列，因此 nums[first] 必然最小
+这样当 nums[second] + nums[third] == target 时，则有 nums[first] + nums[second] + nums[third] = 0
+在循环进行时，先移动 third 指针，当 third 指针于 second 指针重合时，最内层循环结束，second 指针向右移动一格
+当 second 指针移动至数组末尾时，中间层循环结束，first 指针向右移动一格。这样就可以遍历到每一个数
 
+ */
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
