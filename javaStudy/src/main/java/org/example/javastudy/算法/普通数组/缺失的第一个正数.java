@@ -33,7 +33,7 @@ package org.example.javastudy.算法.普通数组;
 第二轮循环不进行操作，第三轮循环就会进入死循环
 为什么要加nums[i]<n，防止出现数组越界
  */
-class Solution16 {
+class Solution17 {
     public int firstMissingPositive(int[] nums) {
         int n = nums.length;
         for (int i = 0; i < n; i++) {
