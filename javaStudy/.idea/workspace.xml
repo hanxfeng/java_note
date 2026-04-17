@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2e48dd66-50a2-4920-bb8f-3b3190a23844" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/javastudy/算法/堆/前k个高频元素.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/javastudy/算法/堆.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/javastudy/算法/堆/数组的第k大元素.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../基础/image/打开笔记本.onetoc2" beforeDir="false" afterPath="$PROJECT_DIR$/../基础/image/打开笔记本.onetoc2" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="3CSyZcnEqe1irDa3p1ZIJQ014Ay" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\35560\Desktop\文件夹\mysql\java\javaStudy\src\main\java\org\example\javastudy\算法\堆" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.138" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="2e48dd66-50a2-4920-bb8f-3b3190a23844" name="更改" comment="" />
+      <created>1776393322562</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1776393322562</updated>
+    </task>
+    <servers />
+  </component>
+</project>
