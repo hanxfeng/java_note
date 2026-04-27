@@ -1,22 +1,31 @@
 package org.example;
 
+import java.util.Arrays;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+
+    public static int lengthOfLIS(int[] nums) {
+        int[] d = new int[nums.length+1];
+        d[0] = 1;
+        // maxNum 是当前最大递增的数的下标
+        int maxNum = 0;
+        for (int i = 1; i < nums.length; i++) {
+            d[i] = 1;
+            for (int j = 0; j<i;j++) {
+                if (nums[i] > nums[j]) {
+                    d[i] = Math.max(d[i], d[j] + 1);
+                }
+            }
+            maxNum = Math.max(maxNum,d[i]);
+        }
+        System.out.println(Arrays.toString(d));
+        System.out.println(maxNum);
+        return  d[maxNum];
+    }
     public static void main(String[] args) {
-        System.out.println("开始");
-        method1();           // 第1个调用
-        System.out.println("结束");
-    }
-
-    static void method1() {
-        System.out.println("进入method1");
-        method2();           // 第2个调用
-        System.out.println("退出method1");
-    }
-
-    static void method2() {
-        System.out.println("进入method2");
-        System.out.println("退出method2");  // 最后调用，但最先结束！
+        System.out.println(lengthOfLIS(new int[] {0,1,0,3,2,3}));
     }
 }
+
