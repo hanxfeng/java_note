@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e48dd66-50a2-4920-bb8f-3b3190a23844" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/javastudy/算法/多维动态规划/编辑距离.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Redis/8_Redis 分布式缓存.md" beforeDir="false" afterPath="$PROJECT_DIR$/../Redis/8_Redis 分布式缓存.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
