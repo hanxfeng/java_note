@@ -41,3 +41,36 @@
 			print(ket, value)
 		end
 		```
+	
+	- ## 函数
+	```Lua
+	function 函数名 (变量1, 变量2) 
+		函数体
+		return 返回值
+	end
+	
+	-- 实例：打印数组
+	local function printArr(arr)
+		for index, value in ipairs(arr) do
+			print(value)
+		end
+	end
+	```
+	
+	- ## 判断 
+	```
+	if (布尔表达式)
+	then 
+		-- 为 true 执行此处语句
+	else
+		-- 为 false 执行此处语句
+	end
+	```
+	
+	- ### 运算符
+	  
+		- and 逻辑与
+		
+		- or 逻辑或
+		  
+		- not 逻辑非
